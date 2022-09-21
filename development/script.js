@@ -5,8 +5,9 @@ var correctAnswer = document.querySelectorAll("#correctAnswer")//right option bu
 var finalScore = document.querySelector("#score")//final score value
 var message = document.querySelectorAll("#message")//show correct or wrong message
 var timer = document.querySelector(".timer") //countdown timer
+var highScoreList = $(".highScoreList")
 
-console.log(finalScore)
+console.log(highScoreList)
 console.log(timer)
 
 
@@ -56,6 +57,27 @@ function checkAnswer (event) {
       }};
 
 document.body.addEventListener("click", checkAnswer)
+
+
+var highscore = $("#score").val();
+var initialsInput = $("#initial").val();
+
+console.log(highscore)
+console.log(initialsInput)
+
+// create function to handle view high score button;
+function highScoreShow(event) {
+    event.preventDefault();
+
+    var highscore = $("#score").val();
+    var initialsInput = $("#initial").val();
+
+highScoreList.append("<li>" + initialsInput + highscore +"<li>");
+}
+
+viewHighScore.on('submit', highScoreShow);
+
+
 
 //if click the button, the page would change;
 
