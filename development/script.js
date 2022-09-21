@@ -5,21 +5,33 @@ var correctAnswer = document.querySelectorAll("#correctAnswer")//right option bu
 var finalScore = document.querySelector("#score")//final score value
 var message = document.querySelectorAll("#message")//show correct or wrong message
 var timer = document.querySelector(".timer") //countdown timer
-var highScoreList = $(".highScoreList")
+var highScoreList = document.querySelector(".highScoreList")
+var noTime = document.querySelector('#noTime')
+
+console.log(noTime)
 
 console.log(highScoreList)
 console.log(timer)
 
 
 
-var score = [];
 
 
-// set the count down;
-secondlefts = 90;
+
+// set the count down & game stop
+secondlefts = 20;
 
 console.log(typeof secondlefts)
 
+function timeOut () {
+firstPage.setAttribute("style", "display: none");
+secondPage.setAttribute("style", "display: none");
+thirdPage.setAttribute("style", "display: none");
+forthPage.setAttribute("style", "display: none");
+fifthPage.setAttribute("style", "display: block");
+SixthPage.setAttribute("style", "display: none");
+noTime.textContent = "Time Out!"
+}
 
 function setTimer() {
     var timeInterval = setInterval(function() {
@@ -27,30 +39,24 @@ function setTimer() {
         countDown.textContent = secondlefts + " seconds left";
         if(secondlefts === 0) {
             clearInterval(timeInterval)
+            timeOut();
         }
     },1000)
 };
 
 startQuiz.addEventListener("click", setTimer);
 
-// // if click the button, the button color would change;
-// document.body.addEventListener("click", function(event) {
-//         var element = event.target;
-//     if (element.matches("button") === true) {
-//         element.setAttribute("style", "background-color: pink")
-//     }
-// });
-
-
 //if click the correct button, would add 10 to score array if wrong would minus 10s
 
+var score = [9,9,9];
 function checkAnswer (event) {
     var element = event.target; 
       if(element.matches("#correctAnswer") === true) {
          score.push('9');
+
          finalScore.textContent = score
       } else {
-        var newseconds = secondlefts - 10
+        setTimer()
         countDown.textContent = (secondlefts - 10) + " seconds left"
         //?? how to make the secondsleft stay -10
 
@@ -69,15 +75,13 @@ console.log(initialsInput)
 function highScoreShow(event) {
     event.preventDefault();
 
-    var highscore = $("#score").val();
-    var initialsInput = $("#initial").val();
-
-highScoreList.append("<li>" + initialsInput + highscore +"<li>");
+highScoreList.append("<li>" + "1" + highscore + initialsInput + "<li>");
 }
 
-viewHighScore.on('submit', highScoreShow);
+// store high score in local storage;
 
-
+var storageLi = localStorage.getItem("storageli");
+localStorage.setItem("storageli", storageLi)
 
 //if click the button, the page would change;
 

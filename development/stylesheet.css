@@ -1,0 +1,21 @@
+.container {
+    display: inline-block;
+    border-style: 1px solid black;
+    width: 50%;
+    font-size: 30px;
+    border: 1px solid;
+    margin-top: 50px;
+    margin-left: 200px;
+    padding: 200px;
+    text-align: center;
+}
+
+
+
+button {
+    background-color: rgb(151, 180, 186);
+    color: aliceblue;
+    border-style: none;
+    font-size: 30px;
+}
+
