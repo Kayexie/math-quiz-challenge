@@ -7,9 +7,10 @@ var message = document.querySelectorAll("#message")//show correct or wrong messa
 var timer = document.querySelector(".timer") //countdown timer
 var wrong = $(".inCorrect")//button wrong
 var initialsInput = document.getElementById("#initial")//input
-var scorelist = $(".scoreli")
+var scorelist = $(".scorelist")
 var oTime = document.getElementById('#oTime')
 
+console.log(finalScore)
 
 // set the count down & game stop
 
@@ -120,32 +121,20 @@ function showeFifthPage (event) {
                      }
                  }
 
+       
 
-var myScore = $('#score').val();
-var initialsInput = $('#initial').val();
+function viewMyscore() {
+    var rank = {
+        myScore: $('#score').val(),
+        initialsInput: $('#initial').val() ,
+         };
 
+localStorage.setItem("rank", JSON.stringify(rank));
+ };
 
-
-// function viewMyscore () {
-//     var rank = {
-//         myScore: score,
-//         initialsInput: initialsInput.value,  
-//           };
-
-// localStorage.setItem("rank", JSON.stringify(rank));
-// };
-
-// function renderLastscore () {
-//     var rankLi = JSON.parse(localStorage.getItem("rank"));
-//     scorelist.append( initialsInput + myScore);
-// }
-
-// function viewMyscore () {
-
-//     scorelist.append( initialsInput + myScore);
-// };
-
-
+ function renderLastscore() {
+    document.getElementById('#scorelist').textContent = JSON.parse(localStorage.getItem("rank"));
+ };
                
 startQuiz.addEventListener("click", showSecondPage);
 quizOneButton.on("click", showeThirdPage);
@@ -155,6 +144,7 @@ quizThreeButton.on("click", showeFifthPage);
 viewHighScore.on("click", function(event) {
 event.preventDefault();
 viewMyscore();
+renderLastscore()
 });
 
 
