@@ -5,36 +5,34 @@ var correctAnswer = document.querySelectorAll("#correctAnswer")//right option bu
 var finalScore = document.querySelector("#score")//final score value
 var message = document.querySelectorAll("#message")//show correct or wrong message
 var timer = document.querySelector(".timer") //countdown timer
-var highScoreList = document.querySelector(".highScoreList")
 var wrong = $(".inCorrect")//button wrong
 var initialsInput = document.getElementById("#initial")//input
+var scorelist = $(".scoreli")
+var oTime = document.getElementById('#oTime')
 
 
 // set the count down & game stop
 
 
-console.log(typeof secondlefts)
-
-function timeOut () {
+function quizOver () {
 firstPage.setAttribute("style", "display: none");
 secondPage.setAttribute("style", "display: none");
 thirdPage.setAttribute("style", "display: none");
 forthPage.setAttribute("style", "display: none");
 fifthPage.setAttribute("style", "display: block");
-SixthPage.setAttribute("style", "display: none");
-noTime.textContent = "Time Out!"
 }
 
 function setTimer(event) {
-    secondlefts = 30;
+    secondlefts = 60;
     var timeInterval = setInterval(function() {
         secondlefts--;
         countDown.textContent = secondlefts + " seconds left";
         if(secondlefts === 0) {
             clearInterval(timeInterval)
             alert("Time is Up")
+            quizOver();
         }
-    },1000); 
+    },700); 
 
 wrong.on("click", function(){
     secondlefts -=10;
@@ -45,8 +43,7 @@ wrong.on("click", function(){
 
 startQuiz.addEventListener("click", setTimer);
 
-
-score = 0;
+var score = 0;
 
 console.log(score)
 function checkAnswer (event) {
@@ -74,7 +71,6 @@ var secondPage = document.querySelector(".quizOne")//2
 var thirdPage = document.querySelector(".quizTwo")//3
 var forthPage = document.querySelector(".quizThree")//4
 var fifthPage = document.querySelector(".fifthPage")//5 alldone
-var SixthPage = document.querySelector(".SixthPage")//6 highscore
 
 var quizOneButton = $(".quizOneButton");
 var quizTwoButton = $(".quizTwoButton");
@@ -90,7 +86,6 @@ secondPage.setAttribute("style", "display: none");
 thirdPage.setAttribute("style", "display: none");
 forthPage.setAttribute("style", "display: none");
 fifthPage.setAttribute("style", "display: none");
-SixthPage.setAttribute("style", "display: none");
 
 function showSecondPage (event) {
    var element = event.target;
@@ -124,36 +119,43 @@ function showeFifthPage (event) {
                          fifthPage.setAttribute("style", "display: block");
                      }
                  }
-                 
 
-var rank = {
-    finalScore: finalScore.value,
-    initialsInput: initialsInput.value,  
-    };
 
-function showeSixthPage (event) {
-    var element = event.target;
-   if (element.matches("button") === true) {
-   fifthPage.setAttribute("style", "display: none");
-   SixthPage.setAttribute("style", "display: block");
-        }                
-   localStorage.setItem("rank", JSON.stringify(rank));
-   showRank()
-    };
+var myScore = $('#score').val();
+var initialsInput = $('#initial').val();
 
-function showRank() {
-    var rankLi = JSON.parse(localStorage.getItem("rank"));
-    highScoreList.innerHTML = rankLi;
-    
-}
-                     
+
+
+// function viewMyscore () {
+//     var rank = {
+//         myScore: score,
+//         initialsInput: initialsInput.value,  
+//           };
+
+// localStorage.setItem("rank", JSON.stringify(rank));
+// };
+
+// function renderLastscore () {
+//     var rankLi = JSON.parse(localStorage.getItem("rank"));
+//     scorelist.append( initialsInput + myScore);
+// }
+
+// function viewMyscore () {
+
+//     scorelist.append( initialsInput + myScore);
+// };
+
+
+               
 startQuiz.addEventListener("click", showSecondPage);
 quizOneButton.on("click", showeThirdPage);
 quizTwoButton.on("click", showeForthPage);
 quizThreeButton.on("click", showeFifthPage);
-viewHighScore.on("click", showeSixthPage);
 
-console.log(quizOneButton)
+viewHighScore.on("click", function(event) {
+event.preventDefault();
+viewMyscore();
+});
 
 
 
