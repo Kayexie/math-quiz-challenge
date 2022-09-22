@@ -17,11 +17,11 @@ Step:
   - 1. CLick 'Start Quiz' button to answer questions.
   - 2. when finished, enter initials to store score.
 
-![Screenshot of the use image](development/image/mathquiz.png);
+![Screenshot of the use image](development/image/mathquiz.png)
 
 Link:
-https://kayexie.github.io/math-quiz-challenge/
-https://github.com/Kayexie/math-quiz-challenge
+ - https://kayexie.github.io/math-quiz-challenge/
+ - https://github.com/Kayexie/math-quiz-challenge
 
 
 ## Credits
