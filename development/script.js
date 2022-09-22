@@ -6,20 +6,12 @@ var finalScore = document.querySelector("#score")//final score value
 var message = document.querySelectorAll("#message")//show correct or wrong message
 var timer = document.querySelector(".timer") //countdown timer
 var highScoreList = document.querySelector(".highScoreList")
-var noTime = document.querySelector('#noTime')
-
-console.log(noTime)
-
-console.log(highScoreList)
-console.log(timer)
-
-
-
-
+var wrong = $(".inCorrect")//button wrong
+var initialsInput = document.getElementById("#initial")//input
 
 
 // set the count down & game stop
-secondlefts = 20;
+
 
 console.log(typeof secondlefts)
 
@@ -33,35 +25,37 @@ SixthPage.setAttribute("style", "display: none");
 noTime.textContent = "Time Out!"
 }
 
-function setTimer() {
+function setTimer(event) {
+    secondlefts = 30;
     var timeInterval = setInterval(function() {
         secondlefts--;
         countDown.textContent = secondlefts + " seconds left";
         if(secondlefts === 0) {
             clearInterval(timeInterval)
-            timeOut();
+            alert("Time is Up")
         }
-    },1000)
-};
+    },1000); 
+
+wrong.on("click", function(){
+    secondlefts -=10;
+    countDown.textContent = secondlefts + " seconds left"
+})
+
+}
 
 startQuiz.addEventListener("click", setTimer);
 
-//if click the correct button, would add 10 to score array if wrong would minus 10s
 
-var score = [9,9,9];
+score = 0;
+
+console.log(score)
 function checkAnswer (event) {
-    var element = event.target; 
-      if(element.matches("#correctAnswer") === true) {
-         score.push('9');
-
-         finalScore.textContent = score
-      } else {
-        setTimer()
-        countDown.textContent = (secondlefts - 10) + " seconds left"
-        //?? how to make the secondsleft stay -10
-
-      }};
-
+        var element = event.target; 
+          if(element.matches("#correctAnswer") === true) {
+            score = score +10;
+             finalScore.textContent = score;}   
+        };        
+     
 document.body.addEventListener("click", checkAnswer)
 
 
@@ -72,16 +66,6 @@ console.log(highscore)
 console.log(initialsInput)
 
 // create function to handle view high score button;
-function highScoreShow(event) {
-    event.preventDefault();
-
-highScoreList.append("<li>" + "1" + highscore + initialsInput + "<li>");
-}
-
-// store high score in local storage;
-
-var storageLi = localStorage.getItem("storageli");
-localStorage.setItem("storageli", storageLi)
 
 //if click the button, the page would change;
 
@@ -141,13 +125,27 @@ function showeFifthPage (event) {
                      }
                  }
                  
+
+var rank = {
+    finalScore: finalScore.value,
+    initialsInput: initialsInput.value,  
+    };
+
 function showeSixthPage (event) {
-            var element = event.target;
-                    if (element.matches("button") === true) {
-                        fifthPage.setAttribute("style", "display: none");
-                        SixthPage.setAttribute("style", "display: block");
-                             }
-                         }
+    var element = event.target;
+   if (element.matches("button") === true) {
+   fifthPage.setAttribute("style", "display: none");
+   SixthPage.setAttribute("style", "display: block");
+        }                
+   localStorage.setItem("rank", JSON.stringify(rank));
+   showRank()
+    };
+
+function showRank() {
+    var rankLi = JSON.parse(localStorage.getItem("rank"));
+    highScoreList.innerHTML = rankLi;
+    
+}
                      
 startQuiz.addEventListener("click", showSecondPage);
 quizOneButton.on("click", showeThirdPage);
@@ -155,6 +153,7 @@ quizTwoButton.on("click", showeForthPage);
 quizThreeButton.on("click", showeFifthPage);
 viewHighScore.on("click", showeSixthPage);
 
+console.log(quizOneButton)
 
 
 
